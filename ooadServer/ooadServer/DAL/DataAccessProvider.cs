@@ -641,5 +641,34 @@ namespace ooadServer.DAL
         {
             return _context.sinhvien.FirstOrDefault(t => Convert.ToString(t.username) == usernames);
         }
+
+        public void AddDKHP_DataRecord(DKHPData dkhp)
+        {
+            _context.dkhpdata.Add(dkhp);
+            _context.SaveChanges();
+        }
+
+        public void UpdateDKHP_DataRecord(DKHPData dkhp)
+        {
+            _context.dkhpdata.Update(dkhp);
+            _context.SaveChanges();
+        }
+
+        public void DeleteDKHP_DataRecord(string id)
+        {
+            var entity = _context.dkhpdata.FirstOrDefault(t => Convert.ToString(t.iddkhp) == id);
+            _context.dkhpdata.Remove(entity);
+            _context.SaveChanges();
+        }
+
+        public DKHPData GetDKHP_DataSingleRecord(string id)
+        {
+            return _context.dkhpdata.FirstOrDefault(t => Convert.ToString(t.iddkhp) == id);
+        }
+
+        public List<DKHPData> GetDKHP_DataRecords()
+        {
+            return _context.dkhpdata.ToList();
+        }
     }
 }

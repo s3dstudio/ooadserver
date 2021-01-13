@@ -23,6 +23,36 @@ namespace ooadServer.Controllers
             return _dataAccessProvider.GetKETQUAHOCTAPRecords();
         }
 
+        [HttpGet("getbyusername/{username}")]
+        public IEnumerable<CHITIETKQHT> GetBuUsername(string username)
+        {
+
+            List<SINHVIEN> sinhvien = _dataAccessProvider.GetSINHVIENRecords();
+            List<KETQUAHOCTAP> ketquahoctap = _dataAccessProvider.GetKETQUAHOCTAPRecords();
+            List<HOCPHAN> hocphan = _dataAccessProvider.GetHOCPHANRecords();
+
+            var query = (from kqht in ketquahoctap
+                         join sv in sinhvien on kqht.idsv equals sv.idsv
+                         join hp in hocphan on kqht.idhocphan equals hp.idhocphan
+                         where sv.username == username
+                         select new CHITIETKQHT
+                         {
+                             idketquahoctap = kqht.idketquahoctap,
+                             idsv = kqht.idsv,
+                             idnhomlop = kqht.idnhomlop,
+                             tenhocphan = hp.tenhocphan,
+                             idhocphan = kqht.idhocphan,
+                             quatrinh = kqht.quatrinh,
+                             thuchanh = kqht.thuchanh,
+                             thi = kqht.thi,
+                             ketqua = kqht.ketqua,
+                             sotinchi = hp.sotinchi
+                         }
+                ).ToList();
+
+            return query;
+        }
+
         [HttpPost("post")]
         public IActionResult Create([FromBody] KETQUAHOCTAP k)
         {

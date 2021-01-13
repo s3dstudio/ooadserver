@@ -30,7 +30,13 @@ namespace ooadServer.Controllers
 
             return dKHP_BUS.GetThongTinDKHP();
         }
+        [HttpGet("dkhp/getdata/{idsv}")]
+        public IEnumerable<DKHP> GetDKHPData(string idsv)
+        {
+            DKHP_BUS dKHP_BUS = new DKHP_BUS(_dataAccessProvider);
 
+            return dKHP_BUS.GetDKHP(idsv);
+        }
         [HttpPost("post")]
         public IActionResult Create([FromBody] HOCPHAN k)
         {

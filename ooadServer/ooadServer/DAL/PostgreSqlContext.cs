@@ -31,6 +31,7 @@ namespace ooadServer.DAL
         public DbSet<CHITIETKHDT> chitietkhdt { get; set; }
         public DbSet<USER> user { get; set; }
         public DbSet<ROLE> role { get; set; }
+        public DbSet<DKHPData> dkhpdata { get; set; }
 
 
 
@@ -78,6 +79,8 @@ namespace ooadServer.DAL
                 .HasKey("username");
             builder.Entity<ROLE>()
                 .HasKey("idrole");
+            builder.Entity<DKHPData>()
+                .HasKey("iddkhp");
         }
 
         public override int SaveChanges()

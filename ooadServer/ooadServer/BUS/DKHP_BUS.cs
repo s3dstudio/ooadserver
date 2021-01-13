@@ -38,8 +38,42 @@ namespace ooadServer.BUS
                               giangvien = gv.tengv,
                               thu = tkbnl.thu,
                               tietbatdau = tkbnl.tietbatdau,
-                              tietketthuc = tkbnl.tietketthuc
+                              tietketthuc = tkbnl.tietketthuc,
+                              idtkbnhomlop = tkbnl.idtkbnhomlop
+                              
                           }
+                ).ToList();
+
+            return query;
+        }
+
+        public List<DKHP> GetDKHP(string idsv)
+        {
+            List<HOCPHAN> hocphan = _dataAccessProvider.GetHOCPHANRecords();
+            List<NHOMLOP> nhomlop = _dataAccessProvider.GetNHOMLOPRecords();
+            List<TKBNHOMLOP> tkbnhomlop = _dataAccessProvider.GetTKBNHOMLOPRecords();
+            List<KHOA> khoa = _dataAccessProvider.GetKHOARecords();
+            List<GIANGVIEN> giangvien = _dataAccessProvider.GetGIANGVIENRecords();
+            List<DKHPData> dkhp = _dataAccessProvider.GetDKHP_DataRecords();
+            var query = (from nl in nhomlop
+                         join hp in hocphan on nl.idhocphan equals hp.idhocphan
+                         join tkbnl in tkbnhomlop on nl.idnhomlop equals tkbnl.idnhomlop
+                         join k in khoa on hp.idkhoa equals k.idkhoa
+                         join gv in giangvien on tkbnl.idgiangvien equals gv.idgiangvien
+                         join dk in dkhp on tkbnl.idtkbnhomlop equals dk.idtkbnhomlop
+                         where dk.idsv == Int32.Parse(idsv)
+                         select new DKHP
+                         {
+                             idnhomlop = nl.idnhomlop,
+                             tenhocphan = hp.tenhocphan,
+                             khoaquanly = k.tenkhoa,
+                             sotinchi = hp.sotinchi,
+                             giangvien = gv.tengv,
+                             thu = tkbnl.thu,
+                             tietbatdau = tkbnl.tietbatdau,
+                             tietketthuc = tkbnl.tietketthuc,
+                             idtkbnhomlop = tkbnl.idtkbnhomlop
+                         }
                 ).ToList();
 
             return query;

@@ -15,6 +15,6 @@ namespace ooadServer.DTO
         public int thu { get; set; }
         public int tietbatdau { get; set; }
         public int tietketthuc { get; set; }
-
+        public int idtkbnhomlop { get; set; }
     }
 }

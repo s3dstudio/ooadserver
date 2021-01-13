@@ -135,5 +135,11 @@ namespace ooadServer.DAL
         ROLE GetROLESingleRecord(string id);
         List<ROLE> GetROLERecords();
 
+        void AddDKHP_DataRecord(DKHPData dkhp);
+        void UpdateDKHP_DataRecord(DKHPData dkhp);
+        void DeleteDKHP_DataRecord(string id);
+        DKHPData GetDKHP_DataSingleRecord(string id);
+        List<DKHPData> GetDKHP_DataRecords();
+
     }
 }
