@@ -19,7 +19,7 @@ namespace ooadServer.DAL
         public void AddKHDTRecord(KHDT k)
         {
             _context.khdt.Add(k);
-            _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public void UpdateKHDTRecord(KHDT k)
